@@ -12,13 +12,13 @@ export default function Navigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name='Account'
-        component={AccountScreen}
+        name='Favorite'
+        component={FavoriteScreen}
         options={{
           headerTitleAlign: 'center',
-          headerTitle: 'Mi cuenta',
-          tabBarLabel: 'Mi cuenta',
-          tabBarIcon: ({ color, size }) => <Icon name='user' color={color} size={size} />,
+          tabBarLabel: 'Favoritos',
+          headerTitle: 'Favoritos',
+          tabBarIcon: ({ color, size }) => <Icon name='heart' color={color} size={size} />,
         }}
       />
       <Tab.Screen
@@ -27,13 +27,13 @@ export default function Navigation() {
         options={{ tabBarLabel: '', tabBarIcon: () => renderPokeball(), headerShown: false }}
       />
       <Tab.Screen
-        name='Favorite'
-        component={FavoriteScreen}
+        name='Account'
+        component={AccountScreen}
         options={{
           headerTitleAlign: 'center',
-          tabBarLabel: 'Favoritos',
-          headerTitle: 'Favoritos',
-          tabBarIcon: ({ color, size }) => <Icon name='heart' color={color} size={size} />,
+          headerTitle: 'Mi cuenta',
+          tabBarLabel: 'Mi cuenta',
+          tabBarIcon: ({ color, size }) => <Icon name='user' color={color} size={size} />,
         }}
       />
     </Tab.Navigator>
