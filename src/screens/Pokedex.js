@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { View } from 'react-native'
-import { getPokemonsApi, getPokemonDetailsByUrlApi } from '../api/pokemon'
-import PokemonList from '../components/PokemonList'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { getPokemonDetailsByUrlApi, getPokemonsApi } from '../api/pokemon'
+import PokemonList from '../components/PokemonList'
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([])
   const [nextUrl, setNextUrl] = useState(null)
-
   const loadPokemons = async () => {
     try {
       const response = await getPokemonsApi(nextUrl)
