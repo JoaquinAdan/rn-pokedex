@@ -39,7 +39,7 @@ export default function Pokemon({ route: { params }, navigation }) {
           type={pokemon.types[0].type.name}
           image={pokemon.sprites.other['official-artwork'].front_default}
         />
-        <View style={{ ...styles.iconsContainer, right: pokemon.types.length > 1 ? 0 : 20 }}>
+        <View style={styles.iconsContainer}>
           <TypeIcon types={pokemon.types} size='medium' />
         </View>
         <Stats stats={pokemon.stats} />
@@ -51,5 +51,6 @@ const styles = StyleSheet.create({
   iconsContainer: {
     position: 'absolute',
     top: 280,
+    left: 20,
   },
 })
