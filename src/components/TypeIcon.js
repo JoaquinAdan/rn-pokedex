@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
     padding: 6,
   },
   name: {
+    fontSize: 12,
     textTransform: 'capitalize',
   },
 })
