@@ -30,8 +30,9 @@ export default function Navigation() {
         name='Account'
         component={AccountScreen}
         options={{
-          headerTitleAlign: 'center',
-          headerTitle: 'Mi cuenta',
+          // headerTitleAlign: 'center',
+          // headerTitle: 'Mi cuenta',
+          headerShown: false,
           tabBarLabel: 'Mi cuenta',
           tabBarIcon: ({ color, size }) => <Icon name='user' color={color} size={size} />,
         }}
