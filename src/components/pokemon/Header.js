@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     width: 280,
     height: 280,
     bottom: -20,
+    zIndex: 10,
   },
   svg: {
     position: 'absolute',

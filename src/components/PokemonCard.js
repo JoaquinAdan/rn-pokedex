@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     right: -10,
     width: 110,
     height: 110,
+    zIndex: 10,
   },
   iconsContainer: {
     position: 'absolute',
