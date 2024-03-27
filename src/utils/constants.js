@@ -19,6 +19,8 @@ import Fairy from '../assets/icons/fairy.svg'
 
 export const API_HOST = 'https://pokeapi.co/api/v2'
 
+export const FAVORITE_STORAGE = 'favorite_pokemons'
+
 export const POKEMON_TYPE_COLORS = {
   normal: '#A8A878',
   fighting: '#C03028',

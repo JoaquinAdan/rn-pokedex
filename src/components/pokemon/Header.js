@@ -10,7 +10,7 @@ export default function Header({ id, name, order, type, image }) {
     <View>
       <LinearGradient
         colors={[getColorByPokemonType(type), 'rgba(255,255,255,1)']}
-        start={{ x: 0, y: 1 }}
+        start={{ x: 0.7, y: 0 }}
         end={{ x: 0, y: 0 }}
         style={styles.bg}
       >
@@ -56,11 +56,9 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   number: {
-    position: 'absolute',
-    right: 10,
-    top: 10,
     color: '#444',
     fontSize: 22,
+    marginBottom: -30
   },
   image: {
     width: 280,
