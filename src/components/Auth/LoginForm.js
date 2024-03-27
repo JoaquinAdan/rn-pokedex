@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, TextInput, Button, Keyboard, ToastAndroid } from 'react-native'
 import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { user, userDetails } from '../../utils/userDB'
@@ -26,7 +25,7 @@ export default function LoginForm() {
     },
   })
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Iniciar sesión</Text>
       <TextInput
         style={styles.input}
@@ -54,11 +53,10 @@ export default function LoginForm() {
         />
       </View>
       <View style={styles.errorContainer}>
-        {/* {formik.errors.username && <Text style={styles.error}>{formik.errors.username}</Text>} */}
         {formik.errors.username && <Text style={styles.error}>{formik.errors.username}</Text>}
         {formik.errors.password && <Text style={styles.error}>{formik.errors.password}</Text>}
       </View>
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -72,7 +70,6 @@ function initialValues() {
 const styles = StyleSheet.create({
   container: {
     width: '90%',
-    paddingBottom: 50,
   },
   title: {
     textAlign: 'center',

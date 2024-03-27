@@ -7,11 +7,7 @@ import useAuth from '../hooks/useAuth'
 export default function Account() {
   const { user } = useAuth()
 
-  return (
-    <View style={[{ justifyContent: user ? 'flex-start' : 'center' }, styles.container]}>
-      {user ? <UserData /> : <LoginForm />}
-    </View>
-  )
+  return <View style={[{ justifyContent: 'center' }, styles.container]}>{user ? <UserData /> : <LoginForm />}</View>
 }
 const styles = StyleSheet.create({
   container: {
