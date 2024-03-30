@@ -17,7 +17,7 @@ export default function PokemonList({ pokemons, loadPokemons, isNext }) {
       contentContainerStyle={styles.flatListContentContainer}
       onEndReached={isNext && loadMore}
       onEndReachedThreshold={0.1}
-      ListFooterComponent={<ActivityIndicator size='large' style={styles.spinner} color='#aeaeae' />}
+      ListFooterComponent={isNext && <ActivityIndicator size='large' style={styles.spinner} color='#aeaeae' />}
     />
   )
 }
