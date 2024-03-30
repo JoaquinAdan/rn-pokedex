@@ -1,14 +1,15 @@
-import { View, Text, Button, StyleSheet } from 'react-native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import React, { useState } from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import { getPokemonsFavorites } from '../api/favorite'
-import { getPokemonDetailsApi, getPokemonDetailsByUrlApi } from '../api/pokemon'
-import useAuth from '../hooks/useAuth'
-import { useFocusEffect } from '@react-navigation/native'
+import { getPokemonDetailsApi } from '../api/pokemon'
 import PokemonList from '../components/PokemonList'
+import useAuth from '../hooks/useAuth'
 
 export default function Favorite() {
-  const { user } = useAuth()
   const [favorites, setFavorites] = useState([])
+  const navigation = useNavigation()
+  const { user } = useAuth()
 
   useFocusEffect(
     React.useCallback(() => {
@@ -31,21 +32,23 @@ export default function Favorite() {
       })()
     }, [user])
   )
-
   return (
     <>
-      {user ? (
-        <View>
-          <Text>Favorite</Text>
-          <PokemonList pokemons={favorites}/>
-          <Text>{JSON.stringify(favorites)}</Text>
+      {Boolean(favorites.length === 0 && user) ? (
+        <View style={styles.adviseContainer}>
+          <Text style={styles.adviseMessage}>Aún no tienes ningún pokemon guardado 😋</Text>
         </View>
+      ) : user ? (
+        <PokemonList pokemons={favorites} isNext={null} />
       ) : (
         <View style={styles.adviseContainer}>
           <Text style={styles.adviseMessage}>
-            Para poder agregar tus pokemons a favoritos o verlos en esta vista, por favor ingresa a tu cuenta para poder ver
+            Para poder agregar tus pokemons a favoritos o verlos en esta vista, por favor ingresa a mi cuenta para poder ver
             tus pokemons favoritos
           </Text>
+          <View style={styles.button}>
+            <Button color='#ef4035' title='Ir a mi cuenta' onPress={() => navigation.navigate('AccountBottom')} />
+          </View>
         </View>
       )}
     </>
@@ -56,7 +59,13 @@ const styles = StyleSheet.create({
   adviseMessage: {
     textAlign: 'center',
     marginTop: 20,
+    marginBottom: 10,
     fontSize: 16,
+  },
+  button: {
+    borderRadius: 10,
+    margin: 10,
+    overflow: 'hidden',
   },
   adviseContainer: {
     flex: 1,
