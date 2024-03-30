@@ -11,7 +11,7 @@ export default function UserData() {
   useFocusEffect(
     React.useCallback(() => {
       ;(async () => {
-        const favs = await getPokemonsFavorites()
+        const favs = await getPokemonsFavorites(user.id)
         setTotalFavs(favs.length)
       })()
     }, [])
@@ -25,7 +25,7 @@ export default function UserData() {
         </Text>
       </View>
       <View style={styles.dataContent}>
-        <ItemMenu title='Nombre' text={`${user.firstName} ${user.lastName}`} />
+        <ItemMenu title='Nombre' text={`${user.firstname} ${user.lastname}`} />
         <ItemMenu title='Username' text={user.username} />
         <ItemMenu title='Email' text={user.email} />
         <ItemMenu title='Total Favoritos' text={`${totalFavs} Pokemons`} />
