@@ -1,38 +1,45 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-// import { includes, pull } from 'lodash'
 import { FAVORITE_STORAGE } from '../utils/constants'
+import useAuth from '../hooks/useAuth'
 
-export async function getPokemonsFavorites() {
+export async function getPokemonsFavorites(userId) {
+  if (userId === undefined) return
   try {
-    const favorites = await AsyncStorage.getItem(FAVORITE_STORAGE)
-    if (!favorites) return []
-    return JSON.parse(favorites)
+    const favorites = await AsyncStorage.getItem(userId)
+    return JSON.parse(favorites) || []
   } catch (error) {
     throw error
   }
 }
 
-export async function addPokemonFavoriteApi(id) {
+export async function addPokemonFavoriteApi(id, userId) {
+  if (userId === undefined) return
   try {
-    const favorites = await getPokemonsFavorites()
+    const favorites = await getPokemonsFavorites(userId)
     favorites.push(id)
-    await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(favorites))
+    await AsyncStorage.setItem(userId, JSON.stringify(favorites))
   } catch (error) {
     throw error
   }
 }
 
-export async function removePokemonFavoriteApi(id) {
-  const favorites = await getPokemonsFavorites()
-  // const newFavorites = pull(favorites, id)
-
-  const newFavorites = favorites.filter((favorite) => favorite !== id)
-  await AsyncStorage.setItem(FAVORITE_STORAGE, JSON.stringify(newFavorites))
-  // await AsyncStorage.removeItem(FAVORITE_STORAGE, JSON.stringify(newFavorites))
+export async function removePokemonFavoriteApi(id, userId) {
+  if (userId === undefined) return
+  try {
+    const favorites = await getPokemonsFavorites(userId)
+    const newFavorites = favorites.filter((favorite) => favorite !== id)
+    await AsyncStorage.setItem(userId, JSON.stringify(newFavorites))
+  } catch (error) {
+    throw error
+  }
 }
 
-export async function isFavoritePokemonApi(id) {
-  const favorites = await getPokemonsFavorites()
-  // return includes(favorites, id)
-  return favorites.includes(id)
+export async function isFavoritePokemonApi(id, userId) {
+  if (userId === undefined) return
+  try {
+    const favorites = await getPokemonsFavorites(userId)
+    return favorites.includes(id)
+  } catch (error) {
+    throw error
+  }
 }
