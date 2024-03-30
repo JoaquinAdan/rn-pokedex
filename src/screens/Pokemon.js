@@ -8,7 +8,6 @@ import Stats from '../components/pokemon/Stats'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import Favorite from '../components/pokemon/Favorite'
 import useAuth from '../hooks/useAuth'
-import { set } from 'lodash'
 
 export default function Pokemon({ route: { params }, navigation }) {
   const [pokemon, setPokemon] = useState(null)
