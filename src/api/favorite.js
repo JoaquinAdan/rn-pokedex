@@ -1,6 +1,4 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { FAVORITE_STORAGE } from '../utils/constants'
-import useAuth from '../hooks/useAuth'
 
 export async function getPokemonsFavorites(userId) {
   if (userId === undefined) return
