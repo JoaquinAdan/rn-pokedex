@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (userData) => {
     const response = await loginUser(userData)
-    console.log(response)
     if (response === 'Usuario o contraseña incorrecta') return response
     setUser(response)
   }
