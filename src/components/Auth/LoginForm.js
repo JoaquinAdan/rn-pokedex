@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet, TextInput, Button, Keyboard, ToastAndroid } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button, Keyboard, ToastAndroid, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { user, userDetails } from '../../utils/userDB'
+import { useNavigation } from '@react-navigation/native'
 import useAuth from '../../hooks/useAuth'
+import { getUsers, removeAllUsers } from '../../api/register'
 
 export default function LoginForm() {
+  const navigation = useNavigation()
   const { login } = useAuth()
   const formik = useFormik({
     initialValues: initialValues(),
@@ -14,19 +16,28 @@ export default function LoginForm() {
       username: Yup.string().required('El usuario es obligatorio'),
       password: Yup.string().required('La contraseña es obligatoria'),
     }),
-    onSubmit: (values) => {
-      const { username, password } = values
-      if (username !== user.username || password !== user.password) {
-        formik.setFieldError('username', 'Usuario o contraseña incorrectos')
-        ToastAndroid.show('El usuario o contraseña son incorrectos', ToastAndroid.SHORT)
+    onSubmit: async (values) => {
+      const response = await login(values)
+      console.log(response)
+      if (response === 'Usuario o contraseña incorrecta') {
+        formik.setFieldError('username', response)
+        ToastAndroid.show(response, ToastAndroid.SHORT)
         return
       }
-      login(userDetails)
     },
   })
+
+  const handlePress = () => navigation.navigate('Register')
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Iniciar sesión</Text>
+      <View style={styles.linkContainer}>
+        <Text>Si aun no tiene una cuenta</Text>
+        <TouchableOpacity onPress={handlePress}>
+          <Text style={styles.link}> registrate</Text>
+        </TouchableOpacity>
+      </View>
       <TextInput
         style={styles.input}
         placeholder='Usuario'
@@ -75,7 +86,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 28,
     fontWeight: 'bold',
+  },
+  linkContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     marginBottom: 15,
+  },
+  link: {
+    color: '#ef4035',
+    textDecorationLine: 'underline',
   },
   input: {
     height: 40,
