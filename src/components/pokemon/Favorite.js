@@ -12,8 +12,10 @@ export default function Favorite({ id }) {
       setIsFavorite(false)
       return
     }
-    await addPokemonFavoriteApi(id, user.id)
-    setIsFavorite(true)
+    if (typeof id === 'number') {
+      await addPokemonFavoriteApi(id, user.id)
+      setIsFavorite(true)
+    }
   }
 
   useEffect(() => {
