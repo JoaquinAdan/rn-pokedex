@@ -18,7 +18,6 @@ export default function LoginForm() {
     }),
     onSubmit: async (values) => {
       const response = await login(values)
-      console.log(response)
       if (response === 'Usuario o contraseña incorrecta') {
         formik.setFieldError('username', response)
         ToastAndroid.show(response, ToastAndroid.SHORT)
