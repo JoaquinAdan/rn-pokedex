@@ -1,12 +1,16 @@
 import React, { useState, createContext } from 'react'
+import { loginUser } from '../api/register'
 
 export const AuthContext = createContext({ user: null, login: () => {}, logout: () => {} })
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
-  const login = (userData) => {
-    setUser(userData)
+  const login = async (userData) => {
+    const response = await loginUser(userData)
+    console.log(response)
+    if (response === 'Usuario o contraseña incorrecta') return response
+    setUser(response)
   }
 
   const logout = () => {
