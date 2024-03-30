@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import {
-  addPokemonFavoriteApi,
-  removePokemonFavoriteApi,
-  getPokemonsFavorites,
-  isFavoritePokemonApi,
-} from '../../api/favorite'
+import { addPokemonFavoriteApi, removePokemonFavoriteApi, isFavoritePokemonApi } from '../../api/favorite'
+import useAuth from '../../hooks/useAuth'
 
 export default function Favorite({ id }) {
   const [isFavorite, setIsFavorite] = useState(false)
-
+  const { user } = useAuth()
   const toggleFavorite = async () => {
-    if (await isFavoritePokemonApi(id)) {
-      await removePokemonFavoriteApi(id)
+    if (await isFavoritePokemonApi(id, user.id)) {
+      await removePokemonFavoriteApi(id, user.id)
       setIsFavorite(false)
       return
     }
-    await addPokemonFavoriteApi(id)
+    await addPokemonFavoriteApi(id, user.id)
     setIsFavorite(true)
   }
 
   useEffect(() => {
     ;(async () => {
-      setIsFavorite(await isFavoritePokemonApi(id))
+      try {
+        setIsFavorite(await isFavoritePokemonApi(id, user.id))
+      } catch (error) {
+        setIsFavorite(false)
+      }
     })()
   }, [id])
 
