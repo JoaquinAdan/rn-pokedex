@@ -37,7 +37,7 @@ export default function Pokemon({ route: { params }, navigation }) {
   }, [params])
 
   return (
-    <SafeAreaView>
+    <View>
       <ScrollView>
         {!pokemon || isLoading ? (
           <ActivityIndicator size='large' color='#aeaeae' style={styles.spinner} />
@@ -57,13 +57,13 @@ export default function Pokemon({ route: { params }, navigation }) {
           </>
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   )
 }
 const styles = StyleSheet.create({
   iconsContainer: {
     position: 'absolute',
-    top: 280,
+    top: 300,
     left: 20,
   },
   spinner: {

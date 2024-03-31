@@ -29,7 +29,7 @@ export default function Header({ id, name, order, type, image }) {
 const styles = StyleSheet.create({
   bg: {
     width: '100%',
-    height: 280,
+    height: 300,
     borderBottomEndRadius: 200,
     borderBottomRightRadius: 200,
     borderBottomLeftRadius: 200,
@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 10,
+    marginTop: 60,
     alignItems: 'center',
     justifyContent: 'center',
     transform: [{ scaleX: 0.5 }],
